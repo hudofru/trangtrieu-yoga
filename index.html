@@ -267,20 +267,29 @@
     .video-box {
       border-radius: var(--r-lg); overflow: hidden; margin-bottom: 48px;
       position: relative; aspect-ratio: 16/6.5;
-      background: var(--ink); cursor: pointer;
+      background: var(--ink); cursor: pointer; display: block;
     }
-    .video-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+    .video-box img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; opacity: 0.65; transition: opacity 0.3s; }
+    .video-box:hover img { opacity: 0.5; }
     .video-box-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px;
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 18px;
+      background: linear-gradient(to top, rgba(20,10,4,0.6) 0%, transparent 60%);
     }
     .play-circle {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: rgba(246,244,241,0.15); border: 2px solid rgba(246,244,241,0.4);
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(255,255,255,0.92);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; color: #fff; transition: all 0.22s;
+      font-size: 1.6rem; color: var(--ink);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: all 0.22s;
     }
-    .video-box:hover .play-circle { background: rgba(246,244,241,0.3); transform: scale(1.08); }
-    .video-box p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: rgba(246,244,241,0.85); }
+    .video-box:hover .play-circle { transform: scale(1.1); background: #fff; }
+    .video-box p {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic;
+      color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      background: rgba(20,10,4,0.35); padding: 6px 18px; border-radius: 100px;
+    }
 
     .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
     .test-card {
@@ -289,12 +298,12 @@
     }
     .stars { color: var(--c5); font-size: 0.82rem; letter-spacing: 2px; margin-bottom: 14px; }
     .test-card blockquote {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
-      font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 16px;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.12rem;
+      font-style: italic; color: var(--ink); line-height: 1.65; margin-bottom: 16px;
     }
     .test-ba {
-      background: var(--c1); border-radius: 10px; padding: 9px 13px;
-      font-size: 0.76rem; color: var(--soft); margin-bottom: 16px;
+      background: var(--c1); border-radius: 10px; padding: 10px 14px;
+      font-size: 0.84rem; color: var(--soft); margin-bottom: 16px;
     }
     .test-ba strong { color: var(--c5); }
     .test-author { display: flex; align-items: center; gap: 11px; }
