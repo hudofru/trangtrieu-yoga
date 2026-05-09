@@ -240,6 +240,8 @@
     .day-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
     .day-num { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; color: #fff; display: block; line-height: 1; }
     .day-lbl { font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(246,244,241,0.6); display: block; margin-top: 4px; }
+    a.day-tile { cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    a.day-tile:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
 
     /* ─── TESTIMONIALS ────────────────────────── */
     #testimonials { background: var(--c1); }
@@ -655,12 +657,12 @@
       <div class="fc-text">
         <span class="label" style="color:rgba(246,244,241,0.6)">Quà tặng từ Trang</span>
         <h2>Thử ngay miễn phí<br>7 ngày đầu tiên</h2>
-        <p>Bộ 7 video yoga trị liệu tại nhà — mỗi ngày 15–30 phút, nhẹ nhàng nhưng thực sự hiệu quả.</p>
+        <p>Bộ 7 video yoga trị liệu cổ vai gáy — mỗi ngày 18–35 phút, nhẹ nhàng nhưng thực sự hiệu quả. Tập ngay tại nhà, hoàn toàn miễn phí.</p>
         <ul class="fc-list">
-          <li>Giảm đau vai gáy rõ rệt từ ngày thứ 3</li>
-          <li>Không cần dụng cụ, tập được ngay tại nhà</li>
-          <li>Video hướng dẫn chi tiết từng tư thế, từng hơi thở</li>
-          <li>Hoàn toàn phù hợp người chưa từng tập yoga</li>
+          <li>Giảm đau mỏi cổ vai gáy rõ rệt từ ngày thứ 3</li>
+          <li>Không cần dụng cụ, không cần phải dẻo</li>
+          <li>Hướng dẫn từng nhịp thở, từng tư thế chi tiết</li>
+          <li>Phù hợp dân văn phòng, người ngồi máy tính nhiều</li>
         </ul>
         <div class="fc-form">
           <input type="tel" placeholder="Số điện thoại của bạn" />
@@ -669,14 +671,29 @@
       </div>
       <div>
         <div class="days-grid">
-          <div class="day-tile"><span class="day-icon">💆</span><span class="day-num">1</span><span class="day-lbl">Vai gáy</span></div>
-          <div class="day-tile"><span class="day-icon">🫁</span><span class="day-num">2</span><span class="day-lbl">Hơi thở</span></div>
-          <div class="day-tile"><span class="day-icon">🌿</span><span class="day-num">3</span><span class="day-lbl">Cột sống</span></div>
-          <div class="day-tile"><span class="day-icon">🧠</span><span class="day-num">4</span><span class="day-lbl">Cơ lõi</span></div>
-          <div class="day-tile"><span class="day-icon">💪</span><span class="day-num">5</span><span class="day-lbl">Thần kinh</span></div>
-          <div class="day-tile"><span class="day-icon">🌙</span><span class="day-num">6</span><span class="day-lbl">Ngủ ngon</span></div>
-          <div class="day-tile"><span class="day-icon">✨</span><span class="day-num">7</span><span class="day-lbl">Năng lượng</span></div>
+          <a class="day-tile" href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" style="text-decoration:none">
+            <span class="day-icon">💆</span><span class="day-num">1</span><span class="day-lbl">Giãn Cơ Cổ</span>
+          </a>
+          <a class="day-tile" href="https://www.youtube.com/watch?v=2S2bXYhcgSI" target="_blank" style="text-decoration:none">
+            <span class="day-icon">🤸</span><span class="day-num">2</span><span class="day-lbl">Kéo Giãn Vai</span>
+          </a>
+          <a class="day-tile" href="https://www.youtube.com/watch?v=FuXtL-lk5dQ" target="_blank" style="text-decoration:none">
+            <span class="day-icon">🌿</span><span class="day-num">3</span><span class="day-lbl">Mở Ngực</span>
+          </a>
+          <a class="day-tile" href="https://youtu.be/JPf3a0CIYCM" target="_blank" style="text-decoration:none">
+            <span class="day-icon">🪴</span><span class="day-num">4</span><span class="day-lbl">Lưng Trên</span>
+          </a>
+          <a class="day-tile" href="https://youtu.be/ZvljcEtH2Fk" target="_blank" style="text-decoration:none">
+            <span class="day-icon">💪</span><span class="day-num">5</span><span class="day-lbl">Cơ Cổ</span>
+          </a>
+          <a class="day-tile" href="https://youtu.be/GVQkDvJbSOQ" target="_blank" style="text-decoration:none">
+            <span class="day-icon">🌅</span><span class="day-num">6</span><span class="day-lbl">Chào Mặt Trời</span>
+          </a>
+          <a class="day-tile" href="https://youtu.be/4KfxfFg5zy8" target="_blank" style="text-decoration:none">
+            <span class="day-icon">🏆</span><span class="day-num">7</span><span class="day-lbl">Tổng Kết</span>
+          </a>
         </div>
+        <p style="text-align:center;margin-top:14px;font-size:0.72rem;color:rgba(246,244,241,0.5)">Nhấn vào từng ngày để xem video trực tiếp →</p>
       </div>
     </div>
   </div>
@@ -742,29 +759,29 @@
     <div class="yt-grid">
       <div class="yt-card">
         <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/nNhDQZv0GCY" title="7 Ngày Trị Liệu Đau Mỏi Cổ Vai Gáy" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube.com/embed/nNhDQZv0GCY" title="Ngày 1 – Yoga Giảm Đau Mỏi Cổ Vai Gáy" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="yt-info">
-          <h4>7 Ngày Trị Liệu Đau Mỏi Cổ Vai Gáy</h4>
-          <p>Chuỗi 7 ngày — giảm đau từ ngày đầu tiên</p>
+          <h4>Ngày 1 — Yoga Giảm Đau Mỏi Cổ Vai Gáy</h4>
+          <p>Bài tập nhẹ nhàng ai cũng làm được · 20 phút</p>
         </div>
       </div>
       <div class="yt-card">
         <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/GNLO_krMdfM" title="Bài tập giảm đau lưng" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube.com/embed/GVQkDvJbSOQ" title="Ngày 6 – Chào Mặt Trời Trị Liệu" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="yt-info">
-          <h4>Bài Tập Giảm Đau Lưng Chuyên Sâu</h4>
-          <p>Cột sống khoẻ, lưng nhẹ nhàng từng ngày</p>
+          <h4>Ngày 6 — Chào Mặt Trời Trị Liệu</h4>
+          <p>Giãn mềm toàn thân, giảm đau vai gáy · 22 phút</p>
         </div>
       </div>
       <div class="yt-card">
         <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/zrOxOFAGKzY" title="1 động tác vai gáy đỡ đau" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube.com/embed/zrOxOFAGKzY" title="1 động tác vai gáy đỡ đau ngủ ngon tới sáng" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="yt-info">
           <h4>1 Động Tác Duy Nhất — Vai Gáy Đỡ Đau, Ngủ Ngon Tới Sáng</h4>
-          <p>Chỉ 3 phút mỗi tối trước khi ngủ</p>
+          <p>Chỉ 3 phút mỗi tối trước khi ngủ · Ngắn & hiệu quả</p>
         </div>
       </div>
     </div>
