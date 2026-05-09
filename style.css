@@ -462,6 +462,9 @@
     .zalo-tip { background: rgba(58,42,28,0.88); color: #fff; font-size: 0.7rem; padding: 3px 10px; border-radius: 100px; white-space: nowrap; }
 
     /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1100px) {
+      .method-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    }
     @media (max-width: 960px) {
       .hero-content { padding: 48px 28px; }
       .pain-grid, .about-grid, .fc-grid { grid-template-columns: 1fr; gap: 40px; }
