@@ -380,49 +380,25 @@
     .cred p { font-size: 0.84rem; margin: 0; }
 
     /* ─── CONTACT ─────────────────────────────── */
-    #contact { background: var(--c0); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: start; }
-    .contact-text h2 { color: var(--ink); margin-bottom: 14px; }
-    .contact-text p { margin-bottom: 32px; }
-    .channels { display: flex; flex-direction: column; gap: 14px; }
-    .channel {
-      display: flex; align-items: center; gap: 14px;
-      background: var(--c1); border: 1px solid var(--c2); border-radius: var(--r-md);
-      padding: 16px 18px; transition: all 0.2s;
+    #contact { background: var(--ink); }
+    .contact-hd { text-align: center; max-width: 560px; margin: 0 auto 52px; }
+    .contact-hd .label { color: var(--c3); }
+    .contact-hd h2 { color: #fff; }
+    .contact-hd p { color: rgba(246,244,241,0.65); font-size: 1rem; }
+    .contact-cta-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .contact-cta-card {
+      border-radius: var(--r-lg); padding: 44px 32px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
     }
-    .channel:hover { background: var(--c2); transform: translateX(4px); }
-    .ch-icon {
-      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700;
-      font-family: 'Be Vietnam Pro', sans-serif;
-    }
-    .ch-zalo { background: #0068ff; color: #fff; }
-    .ch-yt { background: #FF0000; color: #fff; font-size: 1rem; }
-    .ch-fb { background: #1877F2; color: #fff; font-size: 0.9rem; }
-    .ch-lbl { font-size: 0.68rem; color: var(--soft); text-transform: uppercase; letter-spacing: 0.1em; }
-    .ch-val { font-size: 0.96rem; font-weight: 600; color: var(--ink); }
-
-    .cform { background: var(--c1); border-radius: var(--r-lg); padding: 36px; border: 1px solid var(--c2); }
-    .cform h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ink); margin-bottom: 6px; }
-    .cform > p { font-size: 0.83rem; margin-bottom: 24px; }
-    .fg { margin-bottom: 14px; }
-    .fg label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--mid); margin-bottom: 6px; letter-spacing: 0.02em; }
-    .fg input, .fg textarea, .fg select {
-      width: 100%; padding: 11px 16px;
-      border: 1.5px solid var(--c2); border-radius: var(--r-sm);
-      background: var(--c0); color: var(--ink);
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.87rem; outline: none;
-      transition: border-color 0.2s;
-    }
-    .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--c5); }
-    .fg textarea { resize: vertical; min-height: 90px; }
-    .btn-submit {
-      width: 100%; background: var(--ink); color: var(--c0);
-      padding: 14px; border-radius: 100px; border: none; cursor: pointer;
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.88rem; font-weight: 600;
-      letter-spacing: 0.03em; transition: all 0.22s;
-    }
-    .btn-submit:hover { background: var(--c6); transform: translateY(-1px); }
+    .contact-cta-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.3); }
+    .contact-cta-zalo { background: linear-gradient(135deg, #0068ff 0%, #0052cc 100%); }
+    .contact-cta-fb   { background: linear-gradient(135deg, #1877F2 0%, #0a5cbf 100%); }
+    .contact-cta-yt   { background: linear-gradient(135deg, #FF0000 0%, #cc0000 100%); }
+    .cta-icon { font-size: 2.4rem; line-height: 1; }
+    .cta-label { font-size: 1.15rem; font-weight: 600; color: #fff; }
+    .cta-sub { font-size: 0.85rem; color: rgba(255,255,255,0.72); }
 
     /* ─── VIDEO MODAL ─────────────────────────── */
     .modal-backdrop {
@@ -483,7 +459,8 @@
     /* ─── RESPONSIVE ──────────────────────────── */
     @media (max-width: 960px) {
       .hero-content { padding: 48px 28px; }
-      .pain-grid, .about-grid, .contact-grid, .fc-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pain-grid, .about-grid, .fc-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-cta-row { grid-template-columns: 1fr; }
       .method-grid { grid-template-columns: 1fr 1fr; }
       .classes-grid, .yt-grid, .test-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
