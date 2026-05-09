@@ -92,48 +92,48 @@
 
     /* ─── HERO ────────────────────────────────── */
     #hero {
-      padding-top: 66px; min-height: 100svh;
-      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 66px;
+      position: relative;
+      min-height: 92vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
     }
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-      padding: 80px 56px 80px 72px;
+    .hero-banner {
+      position: absolute; inset: 0;
     }
-    .hero-left .eyebrow {
+    .hero-banner img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    }
+    .hero-banner::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(20,12,6,0.72) 0%, rgba(20,12,6,0.35) 60%, rgba(20,12,6,0.15) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1180px; width: 100%; margin: 0 auto;
+      padding: 80px 72px;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .hero-content .eyebrow {
       display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
     }
-    .hero-left .eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--c4); }
-    .hero-left h1 { color: var(--ink); margin-bottom: 6px; }
-    .hero-left h1 em { font-style: italic; color: var(--c5); display: block; }
+    .hero-content .eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: rgba(246,244,241,0.5); }
+    .hero-content h1 { color: #fff; margin-bottom: 6px; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .hero-content h1 em { font-style: italic; color: var(--c3); display: block; }
     .hero-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 1.6vw, 1.25rem); font-style: italic; font-weight: 300;
-      color: var(--soft); margin-bottom: 20px;
+      font-size: clamp(1rem, 1.6vw, 1.3rem); font-style: italic; font-weight: 300;
+      color: rgba(246,244,241,0.82); margin-bottom: 20px;
     }
-    .hero-desc { font-size: 1rem; max-width: 440px; margin-bottom: 36px; }
+    .hero-desc { font-size: 1rem; max-width: 480px; margin-bottom: 36px; color: rgba(246,244,241,0.78); line-height: 1.8; }
     .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
-    .hero-stats { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--c1); }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: var(--ink); display: block; line-height: 1; margin-bottom: 4px; }
-    .stat-lbl { font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--soft); }
-
-    .hero-right {
-      position: relative; overflow: hidden;
-      background: var(--c2);
+    .hero-stats {
+      display: flex; gap: 48px; padding-top: 28px;
+      border-top: 1px solid rgba(246,244,241,0.2);
     }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-    .hero-live-badge {
-      position: absolute; bottom: 36px; left: -16px;
-      background: rgba(246,244,241,0.97); backdrop-filter: blur(8px);
-      border: 1px solid var(--c2); border-radius: var(--r-md);
-      padding: 14px 20px; box-shadow: 0 8px 32px rgba(58,42,28,0.1);
-    }
-    .hero-live-badge .live-dot {
-      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-      background: #e53935; margin-right: 6px; animation: blink 1.5s infinite;
-    }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; color: #fff; display: block; line-height: 1; margin-bottom: 4px; }
+    .stat-lbl { font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(246,244,241,0.6); }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-    .hero-live-badge p { font-size: 0.72rem; color: var(--soft); }
-    .hero-live-badge strong { font-size: 0.88rem; color: var(--ink); }
 
     /* ─── MARQUEE ─────────────────────────────── */
     .marquee { background: var(--c5); overflow: hidden; padding: 13px 0; }
@@ -426,9 +426,7 @@
 
     /* ─── RESPONSIVE ──────────────────────────── */
     @media (max-width: 960px) {
-      #hero { grid-template-columns: 1fr; }
-      .hero-right { height: 55vw; }
-      .hero-left { padding: 40px 24px; }
+      .hero-content { padding: 48px 28px; }
       .pain-grid, .about-grid, .contact-grid, .fc-grid { grid-template-columns: 1fr; gap: 40px; }
       .method-grid { grid-template-columns: 1fr 1fr; }
       .classes-grid, .yt-grid, .test-grid { grid-template-columns: 1fr; }
@@ -467,16 +465,19 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-left">
+  <div class="hero-banner">
+    <img src="assets/banner.png" alt="Trang Triệu Yoga">
+  </div>
+  <div class="hero-content">
     <div class="eyebrow">
-      <span class="label" style="margin:0">Yoga Trị Liệu Chuyên Sâu</span>
+      <span class="label" style="margin:0; color:rgba(246,244,241,0.7)">Yoga Trị Liệu Chuyên Sâu</span>
     </div>
     <h1>Chữa lành<br><em>cơ thể</em><br>từ bên trong</h1>
     <p class="hero-sub">Không cần dẻo. Không cần kinh nghiệm.<br>Chỉ cần bắt đầu hôm nay.</p>
     <p class="hero-desc">Giảm đau lưng • cổ • vai • gáy bằng yoga trị liệu được thiết kế riêng cho người Việt bận rộn — an toàn, hiệu quả, tập được tại nhà.</p>
     <div class="hero-btns">
       <a href="#free-course" class="btn btn-dark">Thử miễn phí 7 ngày →</a>
-      <a href="#classes" class="btn btn-outline">Xem lớp học</a>
+      <a href="#classes" class="btn btn-white">Xem lớp học</a>
     </div>
     <div class="hero-stats">
       <div>
@@ -491,13 +492,6 @@
         <span class="stat-num">98%</span>
         <span class="stat-lbl">Hài lòng</span>
       </div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="assets/photos/IMG_3435.JPG" alt="Trang Triệu Yoga – Yoga trị liệu tại nhà">
-    <div class="hero-live-badge">
-      <p><span class="live-dot"></span>Phát trực tiếp mỗi tuần</p>
-      <strong>📺 7–9 tối Chủ nhật</strong>
     </div>
   </div>
 </section>
