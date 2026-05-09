@@ -72,8 +72,12 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(246,244,241,0.94); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--c1);
-      display: flex; align-items: center; justify-content: space-between;
       padding: 0 36px; height: 66px;
+    }
+    .nav-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%;
     }
     .nav-brand { display: flex; align-items: center; gap: 11px; }
     .nav-brand img { height: 40px; width: 40px; object-fit: contain; border-radius: 50%; }
@@ -450,19 +454,21 @@
 
 <!-- NAVBAR -->
 <nav>
-  <a href="#hero" class="nav-brand">
-    <img src="assets/logo.jpg" alt="logo">
-    <div class="nav-brand-name">Trang Triệu<span>Yoga</span></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#about">Về Trang</a></li>
-    <li><a href="#classes">Lớp học</a></li>
-    <li><a href="#youtube">Video</a></li>
-    <li><a href="#testimonials">Học viên</a></li>
-    <li><a href="#free-course">7 ngày miễn phí</a></li>
-    <li><a href="#contact" class="nav-cta">Liên hệ ngay</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">
+      <img src="assets/logo.jpg" alt="logo">
+      <div class="nav-brand-name">Trang Triệu<span>Yoga</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Về Trang</a></li>
+      <li><a href="#classes">Lớp học</a></li>
+      <li><a href="#youtube">Video</a></li>
+      <li><a href="#testimonials">Học viên</a></li>
+      <li><a href="#free-course">7 ngày miễn phí</a></li>
+      <li><a href="#contact" class="nav-cta">Liên hệ ngay</a></li>
+    </ul>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
 </nav>
 
 <!-- HERO -->
