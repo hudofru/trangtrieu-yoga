@@ -106,13 +106,15 @@
     }
     .hero-banner::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(20,12,6,0.72) 0%, rgba(20,12,6,0.35) 60%, rgba(20,12,6,0.15) 100%);
+      background: linear-gradient(to top, rgba(20,12,6,0.75) 0%, rgba(20,12,6,0.1) 50%, transparent 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
       max-width: 1180px; width: 100%; margin: 0 auto;
-      padding: 80px 72px;
+      padding: 0 72px 60px;
       display: flex; flex-direction: column; align-items: flex-start;
+      justify-content: flex-end;
+      min-height: inherit;
     }
     .hero-content .eyebrow {
       display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
@@ -469,12 +471,6 @@
     <img src="assets/banner.png" alt="Trang Triệu Yoga">
   </div>
   <div class="hero-content">
-    <div class="eyebrow">
-      <span class="label" style="margin:0; color:rgba(246,244,241,0.7)">Yoga Trị Liệu Chuyên Sâu</span>
-    </div>
-    <h1>Chữa lành<br><em>cơ thể</em><br>từ bên trong</h1>
-    <p class="hero-sub">Không cần dẻo. Không cần kinh nghiệm.<br>Chỉ cần bắt đầu hôm nay.</p>
-    <p class="hero-desc">Giảm đau lưng • cổ • vai • gáy bằng yoga trị liệu được thiết kế riêng cho người Việt bận rộn — an toàn, hiệu quả, tập được tại nhà.</p>
     <div class="hero-btns">
       <a href="#free-course" class="btn btn-dark">Thử miễn phí 7 ngày →</a>
       <a href="#classes" class="btn btn-white">Xem lớp học</a>
