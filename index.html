@@ -414,15 +414,15 @@
         <p>Mình sẽ liên hệ lại trong vòng 24 giờ.</p>
         <div class="fg">
           <label>Họ và tên</label>
-          <input type="text" placeholder="Nguyễn Thị Mai">
+          <input type="text" id="f-name" placeholder="Nguyễn Thị Mai">
         </div>
         <div class="fg">
           <label>Số điện thoại</label>
-          <input type="tel" placeholder="09xx xxx xxx">
+          <input type="tel" id="f-phone" placeholder="09xx xxx xxx">
         </div>
         <div class="fg">
           <label>Tình trạng của bạn</label>
-          <select>
+          <select id="f-issue">
             <option value="">Chọn tình trạng...</option>
             <option>Đau vai gáy, cổ</option>
             <option>Đau lưng mãn tính</option>
@@ -433,9 +433,9 @@
         </div>
         <div class="fg">
           <label>Ghi chú thêm (không bắt buộc)</label>
-          <textarea placeholder="Mô tả thêm tình trạng của bạn..."></textarea>
+          <textarea id="f-note" placeholder="Mô tả thêm tình trạng của bạn..."></textarea>
         </div>
-        <button class="btn-submit">Gửi đăng ký →</button>
+        <button class="btn-submit" id="submitBtn">Gửi đăng ký →</button>
       </div>
     </div>
   </div>
@@ -518,5 +518,28 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 </script>
 
+<script>
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    const name  = (document.getElementById('f-name').value || '').trim();
+    const phone = (document.getElementById('f-phone').value || '').trim();
+    const issue = (document.getElementById('f-issue').value || '').trim();
+    const note  = (document.getElementById('f-note').value || '').trim();
+
+    if (!phone) {
+      alert('Vui lòng nhập số điện thoại của bạn.');
+      document.getElementById('f-phone').focus();
+      return;
+    }
+
+    let msg = 'Xin chào Trang Triệu Yoga! Mình muốn đăng ký tư vấn miễn phí.\n';
+    if (name)  msg += 'Tên: ' + name + '\n';
+    msg += 'Số điện thoại: ' + phone + '\n';
+    if (issue) msg += 'Tình trạng: ' + issue + '\n';
+    if (note)  msg += 'Ghi chú: ' + note;
+
+    const encoded = encodeURIComponent(msg);
+    window.open('https://zalo.me/0866172266?text=' + encoded, '_blank');
+  });
+</script>
 </body>
 </html>
