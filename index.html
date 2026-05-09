@@ -209,31 +209,51 @@
     /* ─── CLASSES ─────────────────────────────── */
     #classes { background: var(--c0); }
     .classes-hd { text-align: center; max-width: 580px; margin: 0 auto 52px; }
-    .classes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .classes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
     .class-card {
-      position: relative; border-radius: var(--r-lg); overflow: hidden;
-      aspect-ratio: 3/4;
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: var(--r-lg); padding: 40px 36px;
+      display: flex; flex-direction: column;
+      border: 1px solid var(--c2);
+      transition: transform 0.28s, box-shadow 0.28s;
+      position: relative; overflow: hidden;
     }
-    .class-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(0,0,0,0.18); }
-    .class-thumb { position: absolute; inset: 0; }
-    .class-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s; }
-    .class-card:hover .class-thumb img { transform: scale(1.05); }
-    .class-thumb-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(30,16,6,0.88) 0%, rgba(30,16,6,0.35) 45%, transparent 75%);
+    .class-card::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
     }
-    .class-body {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 28px 26px;
+    .class-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(58,42,28,0.14); }
+    .class-card-1 { background: linear-gradient(135deg, #7a5c42 0%, #9F7F63 100%); }
+    .class-card-2 { background: linear-gradient(135deg, #5a3c28 0%, #7a5c42 100%); }
+    .class-card-3 { background: linear-gradient(135deg, #CBB79E 0%, #B69A7A 100%); }
+    .class-card-4 { background: linear-gradient(135deg, #D6C9B6 0%, #CBB79E 100%); }
+    .class-icon {
+      font-size: 2.8rem; margin-bottom: 24px; display: block;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
     }
     .class-tag {
-      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--c3); font-weight: 700; margin-bottom: 8px; display: block;
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 10px; display: block; opacity: 0.75;
     }
-    .class-body h3 { color: #fff; margin-bottom: 8px; font-size: 1.35rem; line-height: 1.3; }
-    .class-body p { font-size: 0.94rem; color: rgba(246,244,241,0.8); margin-bottom: 12px; line-height: 1.65; }
-    .class-meta { display: flex; gap: 14px; font-size: 0.82rem; color: rgba(246,244,241,0.6); }
+    .class-card-1 .class-tag, .class-card-2 .class-tag { color: rgba(246,244,241,0.8); }
+    .class-card-3 .class-tag, .class-card-4 .class-tag { color: var(--mid); }
+    .class-body { flex: 1; display: flex; flex-direction: column; }
+    .class-body h3 { margin-bottom: 12px; font-size: 1.5rem; line-height: 1.25; }
+    .class-card-1 .class-body h3, .class-card-2 .class-body h3 { color: #fff; }
+    .class-card-3 .class-body h3, .class-card-4 .class-body h3 { color: var(--ink); }
+    .class-body p { font-size: 0.96rem; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+    .class-card-1 .class-body p, .class-card-2 .class-body p { color: rgba(246,244,241,0.82); }
+    .class-card-3 .class-body p, .class-card-4 .class-body p { color: var(--mid); }
+    .class-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.82rem; margin-top: auto; }
+    .class-meta span {
+      padding: 5px 12px; border-radius: 100px;
+      background: rgba(255,255,255,0.15); font-size: 0.78rem;
+    }
+    .class-card-3 .class-meta span, .class-card-4 .class-meta span {
+      background: rgba(58,42,28,0.1); color: var(--mid);
+    }
+    .class-card-1 .class-meta span, .class-card-2 .class-meta span { color: rgba(246,244,241,0.85); }
 
     /* ─── FREE COURSE ─────────────────────────── */
     #free-course {
@@ -646,51 +666,39 @@
       <p>Mỗi chương trình được thiết kế tỉ mỉ để chạm vào đúng nơi cơ thể đang cần lắng nghe.</p>
     </div>
     <div class="classes-grid">
-      <div class="class-card">
-        <div class="class-thumb">
-          <img src="assets/photos/IMG_3426.JPG" alt="Yoga trị liệu vai gáy">
-          <div class="class-thumb-overlay"></div>
-        </div>
+      <div class="class-card class-card-1">
+        <span class="class-icon">🧘</span>
         <div class="class-body">
-          <div class="class-tag">Phổ biến nhất</div>
+          <span class="class-tag">Phổ biến nhất</span>
           <h3>Yoga trị liệu vai gáy</h3>
-          <p>Giải toả căng cơ vai – cổ, giảm tê tay, cải thiện tư thế ngồi làm việc lâu dài.</p>
+          <p>Giải toả căng cơ vai – cổ, giảm tê tay, cải thiện tư thế ngồi làm việc lâu dài. Thích hợp cho người ngồi máy tính nhiều giờ.</p>
           <div class="class-meta"><span>👥 Dân văn phòng</span><span>⏱ 30–45 phút/buổi</span></div>
         </div>
       </div>
-      <div class="class-card">
-        <div class="class-thumb">
-          <img src="assets/photos/IMG_3431.JPG" alt="Yoga trị liệu đau lưng">
-          <div class="class-thumb-overlay"></div>
-        </div>
+      <div class="class-card class-card-2">
+        <span class="class-icon">🌿</span>
         <div class="class-body">
-          <div class="class-tag">Cho mẹ sau sinh</div>
+          <span class="class-tag">Cho mẹ sau sinh</span>
           <h3>Yoga trị liệu đau lưng</h3>
-          <p>Tăng cường cơ lõi, giải áp cột sống, giảm đau lưng dưới hiệu quả và bền vững.</p>
+          <p>Tăng cường cơ lõi, giải áp cột sống, giảm đau lưng dưới hiệu quả và bền vững. Phục hồi cơ thể từ bên trong.</p>
           <div class="class-meta"><span>👥 Đau lưng mãn tính</span><span>⏱ 30–45 phút/buổi</span></div>
         </div>
       </div>
-      <div class="class-card">
-        <div class="class-thumb">
-          <img src="assets/photos/IMG_3437.JPG" alt="Yoga thần kinh toạ">
-          <div class="class-thumb-overlay"></div>
-        </div>
+      <div class="class-card class-card-3">
+        <span class="class-icon">⚡</span>
         <div class="class-body">
-          <div class="class-tag">Cho người trên 35</div>
+          <span class="class-tag">Cho người trên 35</span>
           <h3>Yoga thần kinh toạ</h3>
-          <p>Giải phóng dây thần kinh, giảm đau lan xuống chân, đi lại nhẹ nhàng hơn mỗi ngày.</p>
+          <p>Giải phóng dây thần kinh, giảm đau lan xuống chân, đi lại nhẹ nhàng và tự tin hơn mỗi ngày.</p>
           <div class="class-meta"><span>👥 Ngồi lâu, lái xe</span><span>⏱ 30–45 phút/buổi</span></div>
         </div>
       </div>
-      <div class="class-card">
-        <div class="class-thumb">
-          <img src="assets/photos/IMG_3438.JPG" alt="Yoga giảm stress">
-          <div class="class-thumb-overlay"></div>
-        </div>
+      <div class="class-card class-card-4">
+        <span class="class-icon">🌙</span>
         <div class="class-body">
-          <div class="class-tag">Tâm trí & cảm xúc</div>
+          <span class="class-tag">Tâm trí & cảm xúc</span>
           <h3>Yoga giảm stress & ngủ ngon</h3>
-          <p>Hơi thở sâu, thiền định, cân bằng cảm xúc — ngủ sâu và thức dậy tràn đầy năng lượng.</p>
+          <p>Hơi thở sâu, thiền định, cân bằng cảm xúc — ngủ sâu hơn và thức dậy tràn đầy năng lượng mỗi sáng.</p>
           <div class="class-meta"><span>👥 Lo âu, mất ngủ</span><span>⏱ 20–30 phút/buổi</span></div>
         </div>
       </div>
