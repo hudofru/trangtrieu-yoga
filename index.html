@@ -416,6 +416,29 @@
     }
     .btn-submit:hover { background: var(--c6); transform: translateY(-1px); }
 
+    /* ─── VIDEO MODAL ─────────────────────────── */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(10,5,2,0.88); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      position: relative; width: 90%; max-width: 860px;
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .modal-video { position: relative; padding-top: 56.25%; background: #000; }
+    .modal-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .modal-close {
+      position: absolute; top: -42px; right: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: none; cursor: pointer;
+      color: #fff; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.3); }
+
     /* ─── FOOTER ──────────────────────────────── */
     footer { background: var(--ink); color: rgba(246,244,241,0.7); padding: 64px 0 32px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
@@ -713,13 +736,13 @@
       <p>Hơn 2,500 học viên đã thay đổi cuộc sống nhờ yoga trị liệu của Trang Triệu.</p>
     </div>
 
-    <a class="video-box" href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" rel="noopener" id="videoBox">
+    <div class="video-box" id="videoBox" data-video="nNhDQZv0GCY" style="cursor:pointer">
       <img src="assets/photos/IMG_3433.JPG" alt="Video học viên chia sẻ">
       <div class="video-box-overlay">
         <div class="play-circle">▶</div>
         <p>Xem video thực tế — 7 Ngày Trị Liệu Cổ Vai Gáy</p>
       </div>
-    </a>
+    </div>
 
     <div class="test-grid">
       <div class="test-card">
@@ -934,6 +957,40 @@
   <a href="https://zalo.me/0866172266" class="zalo-btn" target="_blank" title="Nhắn Zalo ngay">Zalo</a>
   <div class="zalo-tip">Nhắn tin ngay</div>
 </div>
+
+<!-- VIDEO MODAL -->
+<div class="modal-backdrop" id="videoModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Đóng">✕</button>
+    <div class="modal-video">
+      <iframe id="modalIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const videoBox = document.getElementById('videoBox');
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('modalIframe');
+  const closeBtn = document.getElementById('modalClose');
+
+  videoBox.addEventListener('click', () => {
+    const vid = videoBox.dataset.video;
+    iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
 
 </body>
 </html>
