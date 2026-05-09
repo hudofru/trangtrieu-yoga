@@ -38,9 +38,9 @@
     /* ─── TYPOGRAPHY ──────────────────────────── */
     .serif { font-family: 'Cormorant Garamond', serif; }
     h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5.5vw, 4.2rem); font-weight: 300; line-height: 1.1; }
-    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 300; line-height: 1.2; }
-    h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 400; line-height: 1.3; }
-    p  { font-size: 0.93rem; color: var(--mid); line-height: 1.75; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; }
+    h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 2.4vw, 1.8rem); font-weight: 400; line-height: 1.3; }
+    p  { font-size: 1rem; color: var(--mid); line-height: 1.8; }
     .label {
       display: inline-block;
       font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -93,11 +93,11 @@
     /* ─── HERO ────────────────────────────────── */
     #hero {
       padding-top: 66px; min-height: 100svh;
-      display: grid; grid-template-columns: 52% 48%;
+      display: grid; grid-template-columns: 1fr 1fr;
     }
     .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 80px 64px 80px 36px;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 80px 56px 80px 72px;
     }
     .hero-left .eyebrow {
       display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
@@ -110,7 +110,7 @@
       font-size: clamp(1rem, 1.6vw, 1.25rem); font-style: italic; font-weight: 300;
       color: var(--soft); margin-bottom: 20px;
     }
-    .hero-desc { font-size: 0.9rem; max-width: 400px; margin-bottom: 36px; }
+    .hero-desc { font-size: 1rem; max-width: 440px; margin-bottom: 36px; }
     .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
     .hero-stats { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--c1); }
     .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: var(--ink); display: block; line-height: 1; margin-bottom: 4px; }
@@ -190,8 +190,8 @@
       border: 1px solid var(--c2); transition: transform 0.22s, box-shadow 0.22s;
     }
     .class-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,0,0,0.08); }
-    .class-thumb { position: relative; height: 220px; overflow: hidden; }
-    .class-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s; }
+    .class-thumb { position: relative; height: 300px; overflow: hidden; }
+    .class-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; transition: transform 0.4s; }
     .class-card:hover .class-thumb img { transform: scale(1.04); }
     .class-thumb-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(58,42,28,0.55) 0%, transparent 55%); }
     .class-body { padding: 24px; }
@@ -296,11 +296,21 @@
     .yt-hd h2 { color: var(--ink); margin-bottom: 12px; }
     .yt-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px; }
     .yt-card { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--c2); background: var(--c1); }
-    .yt-embed { position: relative; padding-top: 56.25%; }
-    .yt-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .yt-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--ink); display: block; }
+    .yt-thumb img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
+    .yt-thumb:hover img { opacity: 0.85; }
+    .yt-play {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .yt-play-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,0,0,0.88); display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.2rem; transition: transform 0.2s;
+    }
+    .yt-thumb:hover .yt-play-btn { transform: scale(1.12); }
     .yt-info { padding: 14px 16px; }
-    .yt-info h4 { font-size: 0.86rem; font-weight: 500; color: var(--ink); line-height: 1.45; margin-bottom: 4px; }
-    .yt-info p { font-size: 0.73rem; color: var(--soft); }
+    .yt-info h4 { font-size: 0.9rem; font-weight: 500; color: var(--ink); line-height: 1.45; margin-bottom: 4px; }
+    .yt-info p { font-size: 0.78rem; color: var(--soft); }
     .yt-cta { text-align: center; }
 
     /* ─── ABOUT ───────────────────────────────── */
@@ -384,8 +394,8 @@
     /* ─── FOOTER ──────────────────────────────── */
     footer { background: var(--ink); color: rgba(246,244,241,0.7); padding: 64px 0 32px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .footer-brand img { height: 52px; margin-bottom: 16px; filter: brightness(10) saturate(0); opacity: 0.85; border-radius: 50%; }
-    .footer-brand p { font-size: 0.82rem; line-height: 1.75; max-width: 270px; margin-bottom: 22px; }
+    .footer-brand img { height: 52px; margin-bottom: 16px; filter: brightness(1.8) saturate(0.3); border-radius: 50%; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.8; max-width: 270px; margin-bottom: 22px; color: rgba(246,244,241,0.92); }
     .socials { display: flex; gap: 10px; }
     .soc {
       width: 34px; height: 34px; border-radius: 50%;
@@ -594,7 +604,7 @@
   <div class="wrap">
     <div class="classes-hd">
       <span class="label">Lớp học chữa lành</span>
-      <h2>Hành trình cho<br>từng cơ thể</h2>
+      <h2>Hành trình cho từng cơ thể</h2>
       <p>Mỗi chương trình được thiết kế tỉ mỉ để chạm vào đúng nơi cơ thể đang cần lắng nghe.</p>
     </div>
     <div class="classes-grid">
@@ -664,10 +674,9 @@
           <li>Hướng dẫn từng nhịp thở, từng tư thế chi tiết</li>
           <li>Phù hợp dân văn phòng, người ngồi máy tính nhiều</li>
         </ul>
-        <div class="fc-form">
-          <input type="tel" placeholder="Số điện thoại của bạn" />
-          <button class="btn btn-white">Nhận ngay →</button>
-        </div>
+        <a href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" class="btn btn-white" style="margin-top:8px">
+          ▶ Bắt đầu Ngày 1 ngay →
+        </a>
       </div>
       <div>
         <div class="days-grid">
@@ -704,17 +713,17 @@
   <div class="wrap">
     <div class="test-hd">
       <span class="label">Học viên nói gì</span>
-      <h2>Những câu chuyện<br>chữa lành thật</h2>
+      <h2>Những câu chuyện chữa lành thật</h2>
       <p>Hơn 2,500 học viên đã thay đổi cuộc sống nhờ yoga trị liệu của Trang Triệu.</p>
     </div>
 
-    <div class="video-box" id="videoBox">
+    <a class="video-box" href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" rel="noopener" id="videoBox">
       <img src="assets/photos/IMG_3433.JPG" alt="Video học viên chia sẻ">
       <div class="video-box-overlay">
         <div class="play-circle">▶</div>
-        <p>Câu chuyện hành trình 90 ngày của học viên</p>
+        <p>Xem video thực tế — 7 Ngày Trị Liệu Cổ Vai Gáy</p>
       </div>
-    </div>
+    </a>
 
     <div class="test-grid">
       <div class="test-card">
@@ -758,27 +767,30 @@
     </div>
     <div class="yt-grid">
       <div class="yt-card">
-        <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/nNhDQZv0GCY" title="Ngày 1 – Yoga Giảm Đau Mỏi Cổ Vai Gáy" allowfullscreen loading="lazy"></iframe>
-        </div>
+        <a class="yt-thumb" href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/nNhDQZv0GCY/maxresdefault.jpg" alt="Ngày 1 – Yoga Giảm Đau Mỏi Cổ Vai Gáy" loading="lazy" onerror="this.src='https://img.youtube.com/vi/nNhDQZv0GCY/hqdefault.jpg'">
+          <div class="yt-play"><div class="yt-play-btn">▶</div></div>
+        </a>
         <div class="yt-info">
           <h4>Ngày 1 — Yoga Giảm Đau Mỏi Cổ Vai Gáy</h4>
           <p>Bài tập nhẹ nhàng ai cũng làm được · 20 phút</p>
         </div>
       </div>
       <div class="yt-card">
-        <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/GVQkDvJbSOQ" title="Ngày 6 – Chào Mặt Trời Trị Liệu" allowfullscreen loading="lazy"></iframe>
-        </div>
+        <a class="yt-thumb" href="https://www.youtube.com/watch?v=GVQkDvJbSOQ" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/GVQkDvJbSOQ/maxresdefault.jpg" alt="Ngày 6 – Chào Mặt Trời Trị Liệu" loading="lazy" onerror="this.src='https://img.youtube.com/vi/GVQkDvJbSOQ/hqdefault.jpg'">
+          <div class="yt-play"><div class="yt-play-btn">▶</div></div>
+        </a>
         <div class="yt-info">
           <h4>Ngày 6 — Chào Mặt Trời Trị Liệu</h4>
           <p>Giãn mềm toàn thân, giảm đau vai gáy · 22 phút</p>
         </div>
       </div>
       <div class="yt-card">
-        <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/zrOxOFAGKzY" title="1 động tác vai gáy đỡ đau ngủ ngon tới sáng" allowfullscreen loading="lazy"></iframe>
-        </div>
+        <a class="yt-thumb" href="https://www.youtube.com/watch?v=zrOxOFAGKzY" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/zrOxOFAGKzY/maxresdefault.jpg" alt="1 động tác vai gáy đỡ đau" loading="lazy" onerror="this.src='https://img.youtube.com/vi/zrOxOFAGKzY/hqdefault.jpg'">
+          <div class="yt-play"><div class="yt-play-btn">▶</div></div>
+        </a>
         <div class="yt-info">
           <h4>1 Động Tác Duy Nhất — Vai Gáy Đỡ Đau, Ngủ Ngon Tới Sáng</h4>
           <p>Chỉ 3 phút mỗi tối trước khi ngủ · Ngắn & hiệu quả</p>
