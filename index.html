@@ -489,6 +489,14 @@
 </script>
 
 <script>
+  // Hamburger menu toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+<script>
   document.getElementById('submitBtn').addEventListener('click', function() {
     const name  = (document.getElementById('f-name').value || '').trim();
     const phone = (document.getElementById('f-phone').value || '').trim();

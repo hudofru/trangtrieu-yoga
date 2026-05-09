@@ -468,6 +468,15 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .days-grid { grid-template-columns: repeat(4,1fr); }
       .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 80px; left: 0; right: 0;
+        background: rgba(246,244,241,0.97); backdrop-filter: blur(14px);
+        padding: 20px 28px 28px; gap: 18px;
+        border-bottom: 1px solid var(--c2);
+        box-shadow: 0 8px 24px rgba(58,42,28,0.08);
+      }
+      .nav-links.open .nav-cta { align-self: flex-start; }
       .hamburger { display: flex; }
     }
     @media (max-width: 640px) {
