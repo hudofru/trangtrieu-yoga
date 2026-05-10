@@ -233,8 +233,9 @@
     #free-course::before {
       content: ''; position: absolute; top: -200px; right: -200px;
       width: 600px; height: 600px; border-radius: 50%;
-      background: rgba(255,255,255,0.03); pointer-events: none;
+      background: rgba(255,255,255,0.03); pointer-events: none; z-index: 0;
     }
+    #free-course .wrap { position: relative; z-index: 1; }
     .fc-hd { text-align: center; max-width: 680px; margin: 0 auto 52px; }
     .fc-hd h2 { color: #fff; margin-bottom: 16px; }
     .fc-hd p { color: rgba(246,244,241,0.75); margin-bottom: 28px; }
