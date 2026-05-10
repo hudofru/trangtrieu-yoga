@@ -436,7 +436,7 @@
       font-size: 0.8rem; color: rgba(246,244,241,0.8); transition: background 0.2s;
     }
     .soc:hover { background: rgba(255,255,255,0.22); }
-    .footer-col h4 { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,244,241,0.4); margin-bottom: 18px; }
+    .footer-col h4 { font-size: 1.2rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,244,241,0.4); margin-bottom: 18px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .footer-col ul a { font-size: 1.2rem; color: rgba(246,244,241,0.7); transition: color 0.2s; }
     .footer-col ul a:hover { color: #fff; }
