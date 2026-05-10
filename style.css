@@ -487,6 +487,8 @@
       section { padding: 64px 0; }
       .method-grid { grid-template-columns: 1fr; }
       .pain-cards { grid-template-columns: 1fr; }
+      .days-grid { grid-template-columns: 1fr 1fr; }
+      .day-tile-final { grid-column: 1 / -1; }
       .hero-stats { gap: 24px; }
       .footer-grid { grid-template-columns: 1fr; }
       .about-photo-thumb { display: none; }
