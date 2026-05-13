@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khóa Học Online – Trang Triệu Yoga</title>
+  <meta name="description" content="Khóa học yoga trị liệu online dành riêng cho học viên đã đăng ký. Tập tại nhà, theo tốc độ của bạn." />
+
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* ── AUTH WALL ─────────────────────────────── */
+    .auth-wall {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 28px 60px;
+      background: var(--c0);
+    }
+    .auth-box {
+      background: #fff;
+      border: 1px solid var(--c1);
+      border-radius: var(--r-lg);
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 8px 40px rgba(58,42,28,0.08);
+      text-align: center;
+    }
+    .auth-box .auth-logo {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: contain;
+      margin: 0 auto 20px;
+      border: 2px solid var(--c2);
+    }
+    .auth-box h2 { font-size: 2rem; margin-bottom: 8px; }
+    .auth-box .auth-sub { font-size: 1.05rem; color: var(--soft); margin-bottom: 32px; }
+
+    .auth-tabs {
+      display: flex;
+      border: 1px solid var(--c2);
+      border-radius: 100px;
+      padding: 4px;
+      margin-bottom: 28px;
+      gap: 4px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 9px 0;
+      border-radius: 100px;
+      border: none;
+      background: transparent;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--soft);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .auth-tab.active {
+      background: var(--ink);
+      color: var(--c0);
+    }
+
+    .form-group { margin-bottom: 18px; text-align: left; }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 7px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--c2);
+      border-radius: var(--r-sm);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      background: var(--c0);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--c5); }
+
+    .auth-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--ink);
+      color: var(--c0);
+      border: none;
+      border-radius: 100px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.22s;
+      margin-top: 8px;
+    }
+    .auth-submit:hover { background: var(--c6); transform: translateY(-1px); }
+    .auth-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+    .auth-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0; color: var(--soft); font-size: 0.9rem;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--c2);
+    }
+
+    .btn-google {
+      width: 100%;
+      padding: 13px;
+      background: #fff;
+      color: var(--ink);
+      border: 1.5px solid var(--c2);
+      border-radius: 100px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: all 0.2s;
+    }
+    .btn-google:hover { background: var(--c0); border-color: var(--c4); }
+
+    .auth-msg {
+      margin-top: 14px;
+      font-size: 1rem;
+      padding: 10px 16px;
+      border-radius: var(--r-sm);
+      display: none;
+    }
+    .auth-msg.error { background: #fdf0f0; color: #c0392b; display: block; }
+    .auth-msg.success { background: #f0fdf4; color: #1a7a3e; display: block; }
+
+    /* ── COURSES PAGE ─────────────────────────── */
+    #courses-page { display: none; }
+
+    .courses-hero {
+      padding: 120px 0 60px;
+      background: linear-gradient(135deg, var(--c0) 0%, var(--c1) 100%);
+      border-bottom: 1px solid var(--c2);
+    }
+    .courses-hero .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .courses-hero-text h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    .courses-hero-text p { max-width: 500px; margin-top: 12px; }
+
+    .user-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff;
+      border: 1px solid var(--c2);
+      border-radius: 100px;
+      padding: 10px 20px 10px 10px;
+    }
+    .user-av {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--c5);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem;
+    }
+    .user-info { font-size: 0.95rem; }
+    .user-info strong { display: block; color: var(--ink); }
+    .user-info span { color: var(--soft); font-size: 0.85rem; }
+    .btn-logout {
+      padding: 7px 18px;
+      background: transparent;
+      border: 1.5px solid var(--c3);
+      border-radius: 100px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+    .btn-logout:hover { background: var(--c1); }
+
+    /* Courses grid */
+    .courses-section { padding: 72px 0; }
+    .section-hd { margin-bottom: 48px; }
+    .section-hd h2 { margin-bottom: 10px; }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .course-card {
+      background: #fff;
+      border: 1px solid var(--c1);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(58,42,28,0.12);
+      border-color: var(--c3);
+    }
+    .course-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--c2);
+      overflow: hidden;
+    }
+    .course-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .course-thumb .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(58,42,28,0.35);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .course-card:hover .play-btn { opacity: 1; }
+    .play-btn-circle {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(246,244,241,0.95);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      color: var(--c5);
+    }
+    .course-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--c5); color: #fff;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .course-body { padding: 24px; }
+    .course-meta {
+      display: flex; gap: 14px;
+      font-size: 0.9rem; color: var(--soft);
+      margin-bottom: 10px;
+    }
+    .course-meta span { display: flex; align-items: center; gap: 5px; }
+    .course-body h3 { font-size: 1.3rem; margin-bottom: 8px; line-height: 1.3; }
+    .course-body p { font-size: 1rem; line-height: 1.6; margin-bottom: 16px; }
+
+    .course-progress { margin-top: 12px; }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem; color: var(--soft); margin-bottom: 6px;
+    }
+    .progress-bar {
+      height: 5px; background: var(--c1); border-radius: 10px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--c5); border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .coming-soon-card {
+      background: var(--c0);
+      border: 2px dashed var(--c2);
+      border-radius: var(--r-md);
+      padding: 40px 24px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; gap: 12px;
+      color: var(--soft);
+      min-height: 280px;
+    }
+    .coming-soon-card .cs-icon { font-size: 2.5rem; }
+    .coming-soon-card h3 { font-size: 1.2rem; color: var(--mid); }
+    .coming-soon-card p { font-size: 0.95rem; }
+
+    /* Video modal reuse from index */
+    #auth-wall { display: flex; }
+
+    @media (max-width: 600px) {
+      .auth-box { padding: 36px 24px; }
+      .courses-hero { padding: 100px 0 48px; }
+      .courses-hero .wrap { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/logo.jpg" alt="logo">
+      <div class="nav-brand-name">Trang Triệu<span>Yoga</span><em class="nav-brand-slogan">Chữa lành cơ thể từ bên trong</em></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">Về Trang</a></li>
+      <li><a href="index.html#classes">Lớp học</a></li>
+      <li><a href="index.html#youtube">Video</a></li>
+      <li><a href="courses.html" style="color:var(--c5);font-weight:600">Khóa học</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Liên hệ</a></li>
+    </ul>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ═══ AUTH WALL (shown when not logged in) ════════════════════ -->
+<div class="auth-wall" id="auth-wall">
+  <div class="auth-box">
+    <img src="assets/logo.jpg" alt="Trang Triệu Yoga" class="auth-logo">
+    <h2>Khóa học Online</h2>
+    <p class="auth-sub">Đăng nhập để truy cập các khóa học độc quyền</p>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Đăng nhập</button>
+      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Đăng ký</button>
+    </div>
+
+    <!-- Login form -->
+    <div id="form-login">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="email@example.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="auth-submit" id="btn-login" onclick="handleLogin()">Đăng nhập →</button>
+
+      <div class="auth-divider">hoặc</div>
+      <button class="btn-google" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Tiếp tục với Google
+      </button>
+    </div>
+
+    <!-- Register form -->
+    <div id="form-register" style="display:none">
+      <div class="form-group">
+        <label>Họ và tên</label>
+        <input type="text" id="reg-name" placeholder="Nguyễn Thị Lan" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="email@example.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <input type="password" id="reg-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" />
+      </div>
+      <button class="auth-submit" id="btn-register" onclick="handleRegister()">Tạo tài khoản →</button>
+
+      <div class="auth-divider">hoặc</div>
+      <button class="btn-google" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Tiếp tục với Google
+      </button>
+    </div>
+
+    <div class="auth-msg" id="auth-msg"></div>
+  </div>
+</div>
+
+<!-- ═══ COURSES PAGE (shown when logged in) ════════════════════ -->
+<div id="courses-page">
+
+  <!-- Hero bar -->
+  <div class="courses-hero">
+    <div class="wrap">
+      <div class="courses-hero-text">
+        <span class="label">Khu vực học viên</span>
+        <h1>Khóa học của bạn</h1>
+        <p>Tập theo tốc độ của mình — mọi lúc, mọi nơi. Chúc bạn một buổi tập nhẹ nhàng 🙏</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div class="user-badge">
+          <div class="user-av" id="user-av">TT</div>
+          <div class="user-info">
+            <strong id="user-name">Học viên</strong>
+            <span id="user-email-display">—</span>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course list -->
+  <section class="courses-section">
+    <div class="wrap">
+      <div class="section-hd">
+        <span class="label">Khóa học đang mở</span>
+        <h2>Hành trình chữa lành của bạn</h2>
+        <p>Mỗi khóa học được thiết kế để bạn cảm nhận sự thay đổi từ buổi tập đầu tiên.</p>
+      </div>
+
+      <div class="courses-grid" id="courses-grid">
+
+        <!-- Course 1: Vai Gáy -->
+        <div class="course-card" onclick="openCourse('vai-gay')">
+          <div class="course-thumb">
+            <img src="assets/photos/IMG_3440.JPG" alt="Yoga trị liệu vai gáy" loading="lazy">
+            <div class="play-btn"><div class="play-btn-circle">▶</div></div>
+            <span class="course-badge">Phổ biến nhất</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span>🧘 7 bài học</span>
+              <span>⏱ ~3.5 giờ</span>
+              <span>🌿 Người mới</span>
+            </div>
+            <h3>Yoga Trị Liệu Cổ Vai Gáy</h3>
+            <p>Giải toả căng cơ vai–cổ, giảm tê tay, cải thiện tư thế ngồi làm việc lâu dài.</p>
+            <div class="course-progress">
+              <div class="progress-label"><span>Tiến độ</span><span>0 / 7 bài</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2: Đau Lưng -->
+        <div class="course-card" onclick="openCourse('dau-lung')">
+          <div class="course-thumb">
+            <img src="assets/photos/IMG_3435.JPG" alt="Yoga trị liệu đau lưng" loading="lazy">
+            <div class="play-btn"><div class="play-btn-circle">▶</div></div>
+            <span class="course-badge">Cho mẹ sau sinh</span>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span>🌿 6 bài học</span>
+              <span>⏱ ~3 giờ</span>
+              <span>🌿 Người mới</span>
+            </div>
+            <h3>Yoga Trị Liệu Đau Lưng</h3>
+            <p>Tăng cường cơ lõi, giải áp cột sống, giảm đau lưng dưới hiệu quả và bền vững.</p>
+            <div class="course-progress">
+              <div class="progress-label"><span>Tiến độ</span><span>0 / 6 bài</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coming soon -->
+        <div class="coming-soon-card">
+          <div class="cs-icon">🌙</div>
+          <h3>Yoga Giảm Stress & Ngủ Ngon</h3>
+          <p>Khóa học mới đang được Trang chuẩn bị. Sẽ ra mắt sớm!</p>
+          <span class="label" style="margin-top:8px">Sắp ra mắt</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-bottom">© 2026 Trang Triệu Yoga · Khu vực học viên · <a href="index.html">← Về trang chủ</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ SUPABASE CONFIG ════════════════════════════════════════ -->
+<script>
+  // ⚠️  REPLACE THESE with your Supabase project values
+  // Go to: https://supabase.com → Your Project → Settings → API
+  const SUPABASE_URL  = 'https://YOUR_PROJECT_ID.supabase.co';
+  const SUPABASE_ANON = 'YOUR_ANON_PUBLIC_KEY';
+
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // ── Check session on load ──────────────────────────────────
+  window.addEventListener('DOMContentLoaded', async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) showCoursesPage(session.user);
+
+    // Handle redirect from Google OAuth
+    sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        showCoursesPage(session.user);
+      } else if (event === 'SIGNED_OUT') {
+        showAuthWall();
+      }
+    });
+  });
+
+  // ── UI helpers ────────────────────────────────────────────
+  function showCoursesPage(user) {
+    document.getElementById('auth-wall').style.display  = 'none';
+    document.getElementById('courses-page').style.display = 'block';
+
+    const email = user.email || '';
+    const name  = user.user_metadata?.full_name || email.split('@')[0] || 'Học viên';
+    const initials = name.split(' ').map(w => w[0]).slice(-2).join('').toUpperCase();
+
+    document.getElementById('user-name').textContent         = name;
+    document.getElementById('user-email-display').textContent = email;
+    document.getElementById('user-av').textContent            = initials;
+  }
+
+  function showAuthWall() {
+    document.getElementById('auth-wall').style.display  = 'flex';
+    document.getElementById('courses-page').style.display = 'none';
+  }
+
+  function switchTab(tab) {
+    document.getElementById('form-login').style.display    = tab === 'login'    ? '' : 'none';
+    document.getElementById('form-register').style.display = tab === 'register' ? '' : 'none';
+    document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+    document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+    clearMsg();
+  }
+
+  function showMsg(text, type) {
+    const el = document.getElementById('auth-msg');
+    el.textContent = text;
+    el.className = 'auth-msg ' + type;
+  }
+  function clearMsg() {
+    const el = document.getElementById('auth-msg');
+    el.className = 'auth-msg';
+    el.textContent = '';
+  }
+
+  // ── Auth actions ──────────────────────────────────────────
+  async function handleLogin() {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const btn      = document.getElementById('btn-login');
+
+    if (!email || !password) { showMsg('Vui lòng nhập đầy đủ thông tin.', 'error'); return; }
+
+    btn.disabled = true; btn.textContent = 'Đang đăng nhập...';
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    btn.disabled = false; btn.textContent = 'Đăng nhập →';
+
+    if (error) showMsg('Email hoặc mật khẩu không đúng.', 'error');
+  }
+
+  async function handleRegister() {
+    const name     = document.getElementById('reg-name').value.trim();
+    const email    = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const btn      = document.getElementById('btn-register');
+
+    if (!name || !email || !password) { showMsg('Vui lòng điền đầy đủ thông tin.', 'error'); return; }
+    if (password.length < 6) { showMsg('Mật khẩu tối thiểu 6 ký tự.', 'error'); return; }
+
+    btn.disabled = true; btn.textContent = 'Đang tạo tài khoản...';
+    const { error } = await sb.auth.signUp({
+      email, password,
+      options: { data: { full_name: name } }
+    });
+    btn.disabled = false; btn.textContent = 'Tạo tài khoản →';
+
+    if (error) {
+      showMsg(error.message.includes('already registered')
+        ? 'Email này đã được đăng ký. Vui lòng đăng nhập.'
+        : 'Đã xảy ra lỗi. Vui lòng thử lại.', 'error');
+    } else {
+      showMsg('✓ Kiểm tra email để xác nhận tài khoản, sau đó đăng nhập!', 'success');
+    }
+  }
+
+  async function handleGoogleLogin() {
+    await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.href }
+    });
+  }
+
+  async function handleLogout() {
+    await sb.auth.signOut();
+  }
+
+  // ── Course click (placeholder — expand later) ─────────────
+  function openCourse(slug) {
+    // TODO: navigate to individual course page, e.g. course.html?id=vai-gay
+    alert('Khóa học "' + slug + '" sẽ được mở đầy đủ sớm!\nHiện tại đang cấu hình video và bài học.');
+  }
+</script>
+
+</body>
+</html>
