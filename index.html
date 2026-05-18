@@ -29,6 +29,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- MailerLite Universal -->
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2358126');
+  </script>
+  <!-- End MailerLite Universal -->
+
+  <style>
+    /* ── Lead Capture Modal ── */
+    .lc-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(58,42,28,0.55); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .lc-backdrop.open { display: flex; }
+    .lc-box {
+      background: var(--c0); border-radius: var(--r-lg);
+      padding: 40px 36px; max-width: 480px; width: 100%;
+      position: relative; box-shadow: 0 24px 64px rgba(58,42,28,0.25);
+      animation: lcIn 0.25s ease;
+    }
+    @keyframes lcIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .lc-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none; font-size: 1.4rem;
+      color: var(--soft); cursor: pointer; line-height: 1;
+    }
+    .lc-box .lc-icon { font-size: 2.4rem; margin-bottom: 8px; }
+    .lc-box h3 { font-family: 'Lora', serif; font-size: 1.6rem; font-weight: 400; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+    .lc-box .lc-sub { font-size: 1rem; color: var(--mid); margin-bottom: 24px; }
+    .lc-box .ml-embedded { margin: 0; }
+  </style>
 </head>
 <body>
 
@@ -44,7 +80,7 @@
       <li><a href="#classes">Lớp học</a></li>
       <li><a href="#youtube">Video</a></li>
       <li><a href="#testimonials">Học viên</a></li>
-      <li><a href="#free-course">7 ngày miễn phí</a></li>
+      <li><a href="7-ngay-mien-phi.html">7 ngày miễn phí</a></li>
       <li><a href="courses.html" style="color:var(--c5);font-weight:600">🎓 Khóa học</a></li>
       <li><a href="#contact" class="nav-cta">Liên hệ ngay</a></li>
     </ul>
@@ -221,52 +257,52 @@
       </ul>
     </div>
     <div class="days-grid">
-      <a class="day-tile" href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank">
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">1</span>
         <span class="day-icon">💆</span>
         <span class="day-lbl">Giãn Cơ Cổ</span>
         <span class="day-dur">20 phút</span>
-      </a>
-      <a class="day-tile" href="https://www.youtube.com/watch?v=2S2bXYhcgSI" target="_blank">
+      </div>
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">2</span>
         <span class="day-icon">🤸</span>
         <span class="day-lbl">Kéo Giãn Vai</span>
         <span class="day-dur">25 phút</span>
-      </a>
-      <a class="day-tile" href="https://www.youtube.com/watch?v=FuXtL-lk5dQ" target="_blank">
+      </div>
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">3</span>
         <span class="day-icon">🌿</span>
         <span class="day-lbl">Mở Ngực</span>
         <span class="day-dur">18 phút</span>
-      </a>
-      <a class="day-tile" href="https://youtu.be/JPf3a0CIYCM" target="_blank">
+      </div>
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">4</span>
         <span class="day-icon">🪴</span>
         <span class="day-lbl">Lưng Trên</span>
         <span class="day-dur">30 phút</span>
-      </a>
-      <a class="day-tile" href="https://youtu.be/ZvljcEtH2Fk" target="_blank">
+      </div>
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">5</span>
         <span class="day-icon">💪</span>
         <span class="day-lbl">Cơ Cổ</span>
         <span class="day-dur">22 phút</span>
-      </a>
-      <a class="day-tile" href="https://youtu.be/GVQkDvJbSOQ" target="_blank">
+      </div>
+      <div class="day-tile" onclick="openLeadCapture()">
         <span class="day-num">6</span>
         <span class="day-icon">🌅</span>
         <span class="day-lbl">Chào Mặt Trời</span>
         <span class="day-dur">35 phút</span>
-      </a>
-      <a class="day-tile day-tile-final" href="https://youtu.be/4KfxfFg5zy8" target="_blank">
+      </div>
+      <div class="day-tile day-tile-final" onclick="openLeadCapture()">
         <span class="day-num">7</span>
         <span class="day-icon">🏆</span>
         <span class="day-lbl">Tổng Kết</span>
         <span class="day-dur">28 phút</span>
-      </a>
+      </div>
     </div>
     <div class="fc-cta">
-      <a href="https://www.youtube.com/watch?v=nNhDQZv0GCY" target="_blank" class="btn btn-white">▶ Bắt đầu Ngày 1 ngay →</a>
-      <p>Nhấn vào từng ngày để xem video trực tiếp</p>
+      <button onclick="openLeadCapture()" class="btn btn-white">▶ Nhận ngay 7 video miễn phí →</button>
+      <p>Nhập email để nhận video Ngày 1 ngay lập tức</p>
     </div>
   </div>
 </section>
@@ -469,6 +505,17 @@
   </div>
 </footer>
 
+<!-- LEAD CAPTURE MODAL -->
+<div class="lc-backdrop" id="lcModal">
+  <div class="lc-box">
+    <button class="lc-close" onclick="closeLeadCapture()" aria-label="Đóng">✕</button>
+    <div class="lc-icon">🎁</div>
+    <h3>Nhận miễn phí<br>7 ngày yoga trị liệu</h3>
+    <p class="lc-sub">Nhập thông tin bên dưới — video Ngày 1 sẽ được gửi vào email của bạn ngay lập tức.</p>
+    <div class="ml-embedded" data-form="JV0xXC"></div>
+  </div>
+</div>
+
 <!-- ZALO FLOAT — outside hero so it doesn't clash -->
 
 
@@ -498,8 +545,20 @@
   function closeModal() {
     modal.classList.remove('open');
     iframe.src = '';
+  }
+
+  // Lead Capture Modal
+  function openLeadCapture() {
+    document.getElementById('lcModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLeadCapture() {
+    document.getElementById('lcModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+  document.getElementById('lcModal').addEventListener('click', function(e) {
+    if (e.target === this) closeLeadCapture();
+  });
 
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
