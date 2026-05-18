@@ -12,142 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
-    /* ── AUTH WALL ─────────────────────────────── */
-    .auth-wall {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 28px 60px;
-      background: var(--c0);
-    }
-    .auth-box {
-      background: #fff;
-      border: 1px solid var(--c1);
-      border-radius: var(--r-lg);
-      padding: 48px 44px;
-      width: 100%;
-      max-width: 460px;
-      box-shadow: 0 8px 40px rgba(58,42,28,0.08);
-      text-align: center;
-    }
-    .auth-box .auth-logo {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      object-fit: contain;
-      margin: 0 auto 20px;
-      border: 2px solid var(--c2);
-    }
-    .auth-box h2 { font-size: 2rem; margin-bottom: 8px; }
-    .auth-box .auth-sub { font-size: 1.05rem; color: var(--soft); margin-bottom: 32px; }
-
-    .auth-tabs {
-      display: flex;
-      border: 1px solid var(--c2);
-      border-radius: 100px;
-      padding: 4px;
-      margin-bottom: 28px;
-      gap: 4px;
-    }
-    .auth-tab {
-      flex: 1;
-      padding: 9px 0;
-      border-radius: 100px;
-      border: none;
-      background: transparent;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--soft);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .auth-tab.active {
-      background: var(--ink);
-      color: var(--c0);
-    }
-
-    .form-group { margin-bottom: 18px; text-align: left; }
-    .form-group label {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 7px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1.5px solid var(--c2);
-      border-radius: var(--r-sm);
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.1rem;
-      color: var(--ink);
-      background: var(--c0);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus { border-color: var(--c5); }
-
-    .auth-submit {
-      width: 100%;
-      padding: 14px;
-      background: var(--ink);
-      color: var(--c0);
-      border: none;
-      border-radius: 100px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.22s;
-      margin-top: 8px;
-    }
-    .auth-submit:hover { background: var(--c6); transform: translateY(-1px); }
-    .auth-submit:disabled { opacity: 0.6; cursor: default; transform: none; }
-
-    .auth-divider {
-      display: flex; align-items: center; gap: 12px;
-      margin: 20px 0; color: var(--soft); font-size: 0.9rem;
-    }
-    .auth-divider::before, .auth-divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--c2);
-    }
-
-    .btn-google {
-      width: 100%;
-      padding: 13px;
-      background: #fff;
-      color: var(--ink);
-      border: 1.5px solid var(--c2);
-      border-radius: 100px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      transition: all 0.2s;
-    }
-    .btn-google:hover { background: var(--c0); border-color: var(--c4); }
-
-    .auth-msg {
-      margin-top: 14px;
-      font-size: 1rem;
-      padding: 10px 16px;
-      border-radius: var(--r-sm);
-      display: none;
-    }
-    .auth-msg.error { background: #fdf0f0; color: #c0392b; display: block; }
-    .auth-msg.success { background: #f0fdf4; color: #1a7a3e; display: block; }
-
     /* ── COURSES PAGE ─────────────────────────── */
-    #courses-page { display: none; }
 
     .courses-hero {
       padding: 120px 0 60px;
@@ -280,11 +146,7 @@
     .coming-soon-card h3 { font-size: 1.2rem; color: var(--mid); }
     .coming-soon-card p { font-size: 0.95rem; }
 
-    /* Video modal reuse from index */
-    #auth-wall { display: flex; }
-
     @media (max-width: 600px) {
-      .auth-box { padding: 36px 24px; }
       .courses-hero { padding: 100px 0 48px; }
       .courses-hero .wrap { flex-direction: column; align-items: flex-start; }
     }
@@ -310,85 +172,16 @@
   </div>
 </nav>
 
-<!-- ═══ AUTH WALL (shown when not logged in) ════════════════════ -->
-<div class="auth-wall" id="auth-wall">
-  <div class="auth-box">
-    <img src="assets/logo.jpg" alt="Trang Triệu Yoga" class="auth-logo">
-    <h2>Khóa học Online</h2>
-    <p class="auth-sub">Đăng nhập để truy cập các khóa học độc quyền</p>
-
-    <!-- Tabs -->
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Đăng nhập</button>
-      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Đăng ký</button>
-    </div>
-
-    <!-- Login form -->
-    <div id="form-login">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="login-email" placeholder="email@example.com" autocomplete="email" />
-      </div>
-      <div class="form-group">
-        <label>Mật khẩu</label>
-        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
-      </div>
-      <button class="auth-submit" id="btn-login" onclick="handleLogin()">Đăng nhập →</button>
-
-      <div class="auth-divider">hoặc</div>
-      <button class="btn-google" onclick="handleGoogleLogin()">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Tiếp tục với Google
-      </button>
-    </div>
-
-    <!-- Register form -->
-    <div id="form-register" style="display:none">
-      <div class="form-group">
-        <label>Họ và tên</label>
-        <input type="text" id="reg-name" placeholder="Nguyễn Thị Lan" />
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="reg-email" placeholder="email@example.com" autocomplete="email" />
-      </div>
-      <div class="form-group">
-        <label>Mật khẩu</label>
-        <input type="password" id="reg-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" />
-      </div>
-      <button class="auth-submit" id="btn-register" onclick="handleRegister()">Tạo tài khoản →</button>
-
-      <div class="auth-divider">hoặc</div>
-      <button class="btn-google" onclick="handleGoogleLogin()">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Tiếp tục với Google
-      </button>
-    </div>
-
-    <div class="auth-msg" id="auth-msg"></div>
-  </div>
-</div>
-
-<!-- ═══ COURSES PAGE (shown when logged in) ════════════════════ -->
+<!-- ═══ COURSES PAGE ════════════════════════════════════════ -->
 <div id="courses-page">
 
   <!-- Hero bar -->
   <div class="courses-hero">
     <div class="wrap">
       <div class="courses-hero-text">
-        <span class="label">Khu vực học viên</span>
-        <h1>Khóa học của bạn</h1>
+        <span class="label">Khóa học của Trang Triệu</span>
+        <h1>Yoga Trị Liệu Online</h1>
         <p>Tập theo tốc độ của mình — mọi lúc, mọi nơi. Chúc bạn một buổi tập nhẹ nhàng 🙏</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <div class="user-badge">
-          <div class="user-av" id="user-av">TT</div>
-          <div class="user-info">
-            <strong id="user-name">Học viên</strong>
-            <span id="user-email-display">—</span>
-          </div>
-        </div>
-        <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
       </div>
     </div>
   </div>
